@@ -10,11 +10,11 @@ Reynaldo R. Martínez P. E-Mail: TigerLinux at Gmail dot com.
 
 ## Introduction
 
-This installer was made to automate the tasks of creating a virtualization infrastructure based on OpenStack. So far, There are 2 "flavors" for this installer: One for  Centos 7, and one for Ubuntu 16.04 LTS.
+This installer was made to automate the tasks of creating a virtualization infrastructure based on OpenStack for  Centos 7.
 
-All versions produce a fully production-grade OpenStack installation. You can use this installer to make a single-node all-in-one OpenStack server, or a more complex design with controller and compute nodes. You can also use this installer (with small modifications made by yourself) in order to create a redundant infrastructure.
+All versions produce a fully production-grade OpenStack installation. You can use this installer to make a single-node all-in-one OpenStack server, or a more complex design with controller and compute nodes and storage nodes. You can also use this installer (with small modifications made by yourself) in order to create a redundant infrastructure.
 
-In summary, this installer can produce an OpenStack virtualization service completely usable in production environments, however, remember that the "bugs" factor don't depend solely on us. From time to time OpenStack packages can bring us some bugs too. We are using rpm/deb packages from Ubuntu and Redhat repositories and they can have their own bugs. 
+In summary, this installer can produce an OpenStack virtualization service completely usable in production environments, however, remember that the "bugs" factor don't depend solely on us. From time to time OpenStack packages can bring us some bugs too. We are using rpm packages from Centos/RDO repositories and they can have their own bugs. 
 
 ## Using the Installer.
 
@@ -24,7 +24,7 @@ In summary, this installer can produce an OpenStack virtualization service compl
 
 Read everything you can from **OpenStack** if you want to venture into the virtualization in the cloud World. If you do not like reading, then support yourself with someone who can do the reading and the understanding. Please do not try to use this Installer without having any knowledge at hand. View file `NOTES.txt` to understand a little more about the knowledge which you should have. In the `DOCS` directory you will find notes and other documentation usefull for you. Please read first, understand things, then act !.
 
-And about the OpenStack documentation, you can begin here: [**OpenStack Documentation Site**](http://docs.openstack.org "OpenStack Documentation Site")
+And about the OpenStack documentation, you can begin here: [**OpenStack Documentation Site**](http://docs.openstack.org/ocata "OpenStack Official Documentation Site")
 
 The big world of **OpenStack** includes several technologies from the world of Open-source and the world of networks that must be understood thoroughly before even attempting any installation of OpenStack, whether you use this installation tool or any other. In short, if you do not have the knowledge, do not even try. Gain the knowledge first, then proceed.
 
@@ -57,14 +57,14 @@ The installer has a central configuration file: `./configs/main-config.rc`. This
 # nodes, set the variable to your private network where all your openstack nodes are
 # connected. Example: osprivatenetwork="192.168.56.0/24"
 # Please, never ever use "0.0.0.0/0" here
-osprivatenetwork="192.168.56.60"
+osprivatenetwork="10.10.10.0/24"
 #
 # Keystone is already exposed to the IP's or Network configured on the "osprivatenetwork"
 # variable, but, you can expose all keystone endpoints (ports 5000 and 35357) to an
 # additional admin network, or even "0.0.0.0/0" if you want your Keystone to be reacheable
 # from all the world.
 #
-keystoneclientnetwork="192.168.56.60"
+keystoneclientnetwork="10.10.10.0/24"
 #
 # Manila and Designate are already exposed to any IP or Net included on the
 # "osprivatenetwork" variable. If you want to expose both Manila and Designate services
