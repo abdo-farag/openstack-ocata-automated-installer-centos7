@@ -3,7 +3,6 @@
 Abdo Farag
 E-Mail: abdofarag85 at gmail dot com
 Cairo, Egypt
-Version: 0.0.1 Centos7
 
 
 This Installer forke and based on openstack-ocata-installer-centos7 v1.2.0.el7 "Siberian Lynx" released by Reynaldo R. Martínez P. E-Mail: TigerLinux at Gmail dot com.
