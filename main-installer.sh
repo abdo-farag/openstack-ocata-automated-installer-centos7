@@ -1,8 +1,10 @@
 #!/bin/bash
 #
-# Unattended installer for OpenStack.
-# Reynaldo R. Martinez P.
-# E-Mail: TigerLinux@Gmail.com
+## Unattended Installer (Semi Automated) for OpenStack (OCATA)
+## Abdo Farag
+## E-Mail: abdofarag85@gmail.com
+## This installer forked and based on openstack-ocata-installer-centos7 v1.2.0.el7 "Siberian Lynx" released by:
+## Reynaldo R. Martínez P. E-Mail: TigerLinux at Gmail dot com.
 #
 # Main Installer Script
 # Version: 1.2.0.el7 "Siberian Lynx"
@@ -73,9 +75,9 @@ case $1 in
 	echo ""
 	echo "OPENSTACK UNATTENDED INSTALLER"
 	echo "Flavor: OpenStack OCATA for Centos 7"
-	echo "Made by: Reynaldo R. Martinez P."
-	echo "E-Mail: TigerLinux@Gmail.com"
-	echo "Version 1.2.0.el7 \"Siberian Lynx\" - August 24, 2017"
+	echo "Made by: Abdo Farag."
+	echo "E-Mail: abdofarag85@gmail.com"
+	echo "Version 0.0.1.el7 - September 11, 2017"
 	echo ""
 	echo "I'll verify all requiremens"
 	echo "If any requirement is not met, I'll stop and inform what's missing"
