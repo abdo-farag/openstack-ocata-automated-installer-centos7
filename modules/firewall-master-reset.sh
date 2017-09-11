@@ -1,8 +1,11 @@
 #!/bin/bash
 #
-# Unattended/SemiAutomatted OpenStack Installer
-# Reynaldo R. Martinez P.
-# E-Mail: TigerLinux@Gmail.com
+## Unattended Installer (Semi Automated) for OpenStack (OCATA)
+## Abdo Farag
+## E-Mail: abdofarag85@gmail.com
+## This installer forked and based on openstack-ocata-installer-centos7 v1.2.0.el7 "Siberian Lynx" released by:
+## Reynaldo R. Martínez P. E-Mail: TigerLinux at Gmail dot com.
+#
 # General Firewall Config Script
 # ALERT: DO NOT USE THIS SCRIPT WITH OPENSTACK SERVICES ACTIVE
 # Shutdown your openstack services first with "openstack-control.sh stop" !.

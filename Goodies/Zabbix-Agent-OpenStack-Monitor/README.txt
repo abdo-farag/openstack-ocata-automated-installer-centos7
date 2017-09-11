@@ -1,6 +1,9 @@
 OPENSTACK VARIABLES FOR ZABBIX
-Reynaldo R. Martinez P.
-TigerLinux@gmail.com
+## Unattended Installer (Semi Automated) for OpenStack (OCATA)
+## Abdo Farag
+## E-Mail: abdofarag85@gmail.com
+## This installer forked and based on openstack-ocata-installer-centos7 v1.2.0.el7 "Siberian Lynx" released by:
+## Reynaldo R. Martínez P. E-Mail: TigerLinux at Gmail dot com.
 
 In adition to SNMP, you can include the same variables in zabbix. For this purpose,
 we have included an agent definition file that can be used with zabbix.

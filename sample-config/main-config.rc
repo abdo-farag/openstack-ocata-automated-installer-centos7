@@ -1,14 +1,22 @@
 #!/bin/bash
 #
-# Unattended installer for OpenStack.
-# Reynaldo R. Martinez P.
-# E-Mail: TigerLinux@Gmail.com
+#!/bin/bash
+#
+## Unattended Installer (Semi Automated) for OpenStack (OCATA)
+## Abdo Farag
+## E-Mail: abdofarag85@gmail.com
+## This installer forked and based on openstack-ocata-installer-centos7 v1.2.0.el7 "Siberian Lynx" released by:
+## Reynaldo R. Martínez P. E-Mail: TigerLinux at Gmail dot com.
 #
 # Main Configuration
-# Version: 1.2.0.el7 "Siberian Lynx"
-# August 24, 2017
+# Version: 0.0.1
+# September 11, 2017
 #
-
+controller="10.10.10.2"
+compute="10.10.10.12"
+cinder="10.10.10.22"
+#NFS_IP="10.10.10.31"
+password="2H6eW67DB4D13BCeT3E0bC8X0d2Fy45Lb3"
 #
 #
 # SECURITY CONFIGURATION
@@ -28,14 +36,14 @@
 # nodes, set the variable to your private network where all your openstack nodes are
 # connected. Example: osprivatenetwork="192.168.56.0/24"
 # Please, never ever use "0.0.0.0/0" here
-osprivatenetwork="192.168.56.60"
+osprivatenetwork="10.10.10.0/24"
 #
 # Keystone is already exposed to the IP's or Network configured on the "osprivatenetwork"
 # variable, but, you can expose all keystone endpoints (ports 5000 and 35357) to an
 # additional admin network, or even "0.0.0.0/0" if you want your Keystone to be reacheable 
 # from all the world.
 #
-keystoneclientnetwork="192.168.56.60"
+keystoneclientnetwork="10.10.10.0/24"
 #
 # Manila and Designate are already exposed to any IP or Net included on the
 # "osprivatenetwork" variable. If you want to expose both Manila and Designate services 
@@ -79,12 +87,12 @@ dbinstall="yes"
 #
 # Access information for MySQL
 mysqldbadm="root"
-mysqldbpassword="0p3nSt4ck"
+mysqldbpassword="$password"
 mysqldbport="3306"
 #
 # Access information for PostgreSQL
 psqldbadm="postgres"
-psqldbpassword="0p3nSt4ck"
+psqldbpassword="$password"
 psqldbport="5432"
 #
 #
@@ -98,7 +106,7 @@ dbpopulate="yes"
 # no action is taken for database installation, creation or population.
 #
 # Here you define the database backend server IP address. You can use an IP or a FQDN:
-dbbackendhost="192.168.56.60"
+dbbackendhost="$controller"
 #
 # DB Max connections. This parameter needs to be adjusted according to your available
 # cores in your controller
@@ -117,7 +125,7 @@ dbmaxcons="1000"
 messagebrokerinstall="yes"
 # The IP or FQDN of the message broker (always fill this, no matter if you are installing
 # a controller or a compute node).
-messagebrokerhost="192.168.56.60"
+messagebrokerhost="$controller"
 #
 # From MITAKA, we dropped QPID support. Our default is rabbitmq. Please DO NOT TRY to change
 # the following variable, or your installation WILL BREAK.
@@ -126,7 +134,7 @@ brokerflavor="rabbitmq"
 #
 # Autentication information for the message broker
 brokeruser="openstack"
-brokerpass="0p3nSt4ck"
+brokerpass="$password"
 # Virtual Host - Only for RabbitMQ - Please leave our default: "/openstack"
 # WARNING: Please always include the "/" at the beggining of the virtual host name
 brokervhost="/openstack"
@@ -138,64 +146,65 @@ brokervhost="/openstack"
 # In normal conditions, you should only need to change the password
 #
 # Keystone:
-keystonedbname="keystonedb"
-keystonedbuser="keystonedbuser"
-keystonedbpass="0p3nSt4ck"
+keystonedbname="keystone"
+keystonedbuser="keystone"
+keystonedbpass="$password"
 # Glance
-glancedbname="glancedb"
-glancedbuser="glancedbuser"
-glancedbpass="0p3nSt4ck"
+glancedbname="glance"
+glancedbuser="glance"
+glancedbpass="$password"
 # Cinder
-cinderdbname="cinderdb"
-cinderdbuser="cinderdbuser"
-cinderdbpass="0p3nSt4ck"
+cinderdbname="cinder"
+cinderdbuser="cinder"
+cinderdbpass="$password"
 # Neutron
-neutrondbname="neutrondb"
-neutrondbuser="neutrondbuser"
-neutrondbpass="0p3nSt4ck"
+neutrondbname="neutron"
+neutrondbuser="neutron"
+neutrondbpass="$password"
 # Nova
-novadbname="novadb"
-novaapidbname="novaapidb"
-novacell0dbname="novadb_cell0"
-novadbuser="novadbuser"
-novadbpass="0p3nSt4ck"
+novadbname="nova"
+novaapidbname="novaapi"
+novacell0dbname="nova_cell0"
+novadbuser="nova"
+novapass="$password"
+novadbpass="$password"
 # Horizon
-horizondbname="horizondb"
-horizondbuser="horizondbuser"
-horizondbpass="0p3nSt4ck"
+horizondbname="horizon"
+horizondbuser="horizon"
+horizondbpass="$password"
 # Heat
-heatdbname="heatdb"
-heatdbuser="heatdbuser"
-heatdbpass="0p3nSt4ck"
+heatdbname="heat"
+heatdbuser="heat"
+heatdbpass="$password"
 # Trove
-trovedbname="trovedb"
-trovedbuser="trovedbuser"
-trovedbpass="0p3nSt4ck"
+trovedbname="trove"
+trovedbuser="trove"
+trovedbpass="$password"
 # Sahara
-saharadbname="saharadb"
-saharadbuser="saharadbuser"
-saharadbpass="0p3nSt4ck"
+saharadbname="sahara"
+saharadbuser="sahara"
+saharadbpass="$password"
 # Aodh
-aodhdbname="aodhdb"
-aodhdbuser="aodhdbuser"
-aodhdbpass="0p3nSt4ck"
+aodhdbname="aodh"
+aodhdbuser="aodh"
+aodhdbpass="$password"
 # Gnocchi
-gnocchidbname="gnocchidb"
-gnocchidbuser="gnocchidbuser"
-gnocchidbpass="0p3nSt4ck"
+gnocchidbname="gnocchi"
+gnocchidbuser="gnocchi"
+gnocchidbpass="$password"
 # Manila
-maniladbname="maniladb"
-maniladbuser="maniladbuser"
-maniladbpass="0p3nSt4ck"
+maniladbname="manila"
+maniladbuser="manila"
+maniladbpass="$password"
 # Designate
-designatedbname="designatedb"
-designatedbpoolmanagerdb="designatepoolmanagerdb"
-designatedbuser="designatedbuser"
-designatedbpass="0p3nSt4ck"
+designatedbname="designate"
+designatedbpoolmanagerdb="designatepoolmanager"
+designatedbuser="designate"
+designatedbpass="$password"
 # Magnum
-magnumdbname="magnumdb"
-magnumdbuser="magnumdbuser"
-magnumdbpass="0p3nSt4ck"
+magnumdbname="magnum"
+magnumdbuser="magnum"
+magnumdbpass="$password"
 
 #
 # OPENSTACK KEYSTONE
@@ -208,14 +217,14 @@ keystoneinstall="yes"
 #
 # Either controller or compute, put the IP or FQDN for the keystone host,
 # normally, the controller server.
-keystonehost="192.168.56.60"
+keystonehost="$controller"
 # Only if you are using MySQL as DB backend. If for any chance, you have multiple
 # keystone hosts, put here the IP address of the extra hosts, space separated.
 # Normally, this is not necessary unless your mysql service access policies are very
 # strict.
 extrakeystonehosts=""
 # Please regenerate the SERVICE_TOKEN value by using the command: "openssl rand -hex 10"
-SERVICE_TOKEN="044cb8c9e4a00a418827"
+SERVICE_TOKEN="8066bb8819572ddc7a70"
 
 #
 # PLEASE PLEASE PLEASE Leave Keystone Options following as they are. If you change 
@@ -239,7 +248,7 @@ keystone_fulladmin_rc_file="/root/keystonerc_fulladmin"
 # Change the remaining following options to fit your cloud infraestructure needs 
 #
 keystoneadminuseremail="admin@localhost"
-keystoneadminpass="0p3nSt4ck"
+keystoneadminpass="$password"
 #
 # Token Provider Flavor. Three options: fernet, pki or uuid. From Mitaka, fernet is the
 # default.
@@ -253,12 +262,12 @@ endpointsregion="RegionOne"
 # Extra Tenants: Those are sample tenants. The initial password will be
 # the tenant name, a dash, and the password supplied in the "extratenantbasepass" variable.
 # Sample:
-# extratenantbasepass=0p3nSt4ck
+# extratenantbasepass=$password
 # tenant name: extra1
-# resulting password: extra1-0p3nSt4ck
-extratenantbasepass="0p3nSt4ck"
-extratenants="extra1 extra2 extra3"
-domainextratenants="localhost"
+# resulting password: extra1-$password
+#extratenantbasepass="$password"
+#extratenants="extra1 extra2 extra3"
+#domainextratenants="localhost"
 # NOTE: Those extra tenants will be added to the "_member_" and "user" roles. Also the domain
 # is the same for all and it's defined in the domainextratenants variable. You can later
 # change this in Horizon Dashboard.
@@ -274,11 +283,11 @@ domainextratenants="localhost"
 # this in "no".
 # Change the IP, password and e-mail accordingly to your installation scenario.
 #
-swiftinstall="no"
-swifthost="192.168.56.60"
+swiftinstall="yes"
+swifthost="$controller"
 swiftuser="swift"
 swiftsvce="swift"
-swiftpass="0p3nSt4ck"
+swiftpass="$password"
 swiftemail="swift@localhost"
 #
 # SWIFT Workers. Fine tune your swift workers or let swift to auto-tune (auto setting):
@@ -323,10 +332,10 @@ glanceinstall="yes"
 # you are installing the controller or a compute node. This is normally the controller
 # IP address or FQDN if you prefer to use DNS. Also, remember to change the password and
 # e-mail.
-glancehost="192.168.56.60"
+glancehost="$controller"
 glanceuser="glance"
 glancesvce="glance"
-glancepass="0p3nSt4ck"
+glancepass="$password"
 glanceemail="glance@localhost"
 #
 # Fine tune your glance workers. You can set this to "at least" the actual core number
@@ -356,30 +365,30 @@ cinderinstall="yes"
 # e-mail.
 # Note that "cinderhost" IP/FQDN is the one of your controller and it must be the same
 # configured in all your cinder hosts, because it represents the "cinder controller" IP.
-cinderhost="192.168.56.60"
+cinderhost="$controller"
 cinderuser="cinder"
 cindersvce="cinder"
 cindersvcev2="cinderv2"
 cindersvcev3="cinderv3"
-cinderpass="0p3nSt4ck"
+cinderpass="$password"
 cinderemail="cinder@localhost"
 # If your cinder node is a storage host (not all-in-one, not a controller), set the
 # IP of your host here. If you are installing an "all-in-one" or a "controller", the
 # ip here must be the same as in "cinderhost" variable above. If this node is a dedicated
 # storage node, the "cinderhost" variable must be the same as your cinder controller, and 
 # the following variable must be set to the "specific storage node" you are configuring:
-cindernodehost="192.168.56.60"
+cindernodehost="$controller"
 #
 # Next, you can select your storage backends. Do this if you are installing a cinder
 # storage solution (cinder server with storage, or cinder storage-only node).
 #
 # If you want to include the lvm backend, leave the following variable at "yes". Otherwise,
 # put "no" here:
-cinderconfiglvm="yes"
+cinderconfiglvm="no"
 # Our default is to use iscsi. Put here the iscsi server IP. It can be the one of the
 # controller, if you are using a LVM "cinder-volumes" inside the controller. Also, if you are
 # configuring a dedicated storage node, set the node IP here (not the one of your controller)
-cinder_iscsi_ip_address="192.168.56.60"
+cinder_iscsi_ip_address="$controller"
 cinderlvmname="cinder-volumes"
 # Only if you are using MySQL as DB backend. If for any chance, you have multiple
 # cinder hosts, put here the IP address of the extra hosts, space separated.
@@ -398,7 +407,7 @@ cinderconfignfs="no"
 # Also, change the nfs resource for openstack. Tipically, an IP or FQDN followed by 
 # ":" and the resource path
 #
-nfsresource="192.168.1.1:/data/openstack-nfs"
+nfsresource="$cinder:/cinder-volumes"
 #
 # Also, change the nfs mount options. The following should suit most configurations
 # but again, change it and adapt it to your NFS environment
@@ -411,7 +420,7 @@ nfs_mount_options="rw,hard,intr,timeo=90,bg,vers=3,proto=tcp,rsize=32768,wsize=3
 # backend class in multiple cinder storage hosts, all backend classes are appended with the "node host
 # IP address", so, if you have by example 3 hosts all with lvm enable, you'll end with 3 lvm's with
 # the names: lvm-x.y.z.k, lvm-a.b.c.d and lvm-p.q.r.s so enable one as your default !.
-default_volume_type="lvm-$cindernodehost"
+default_volume_type="dell"
 #
 # Finally, the most important setting for your cinder installation. You can install multiple
 # cinder nodes with our installer. Your first note should be "at least" a "controller" node. Here,
@@ -420,7 +429,7 @@ default_volume_type="lvm-$cindernodehost"
 # "controller": This is a cinder node which is a dedicated controller.
 # "storage": This is a conder node which is a storage node.
 # The default for us, if you are installing a "all-in-one" openstack server, is "allinone":
-cindernodetype="allinone"
+cindernodetype="controller"
 # Please remember: Your first cinder node must be either "allinone" or "controller". Aditional
 # nodes must be set to "storage".
 #
@@ -455,18 +464,18 @@ neutroninstall="yes"
 neutron_in_compute_node="no"
 #
 # The IP or FQDN of your neutron network node or controller
-neutronhost="192.168.56.60"
+neutronhost="$controller"
 #
 # If you are installing a compute node, the following variable must be set to the
 # server IP address (the server you are just installing). If you are installing a
 # neutron network node or an ALL-IN-ONE server, use the same IP of the neutronhost
 # variable.
-neutron_computehost="192.168.56.60"
+neutron_computehost="$controller"
 #
 # Here, you should chang the password and e-mail
 neutronuser="neutron"
 neutronsvce="neutron"
-neutronpass="0p3nSt4ck"
+neutronpass="$password"
 neutronemail="neutron@localhost"
 #
 # Finetune your neutron API workers here:
@@ -486,9 +495,9 @@ integration_bridge="br-int"
 # VERY IMPORTANT NOTE: Ensure your OVS Bridges are created before you install openstack,
 # including br-int and all bridges defined in the "bridge_mappings" variable. Fail
 # to do this, and Neutron will be unable to function properlly.
-bridge_mappings="physical01:br-enp0s9"
-dhcp_domain="localdomain"
-metadata_shared_secret="0p3nSt4ck"
+bridge_mappings="provider01:br-eth1,provider02:br-eth2"
+dhcp_domain="abdo.com"
+metadata_shared_secret="$password"
 # VM's Base Mac. Normally you should not need to change this
 basemacspec="fa:16:3e:00:00:00"
 # Lease duration in seconds
@@ -503,7 +512,7 @@ forcegremtu="no"
 #
 # Tenant network type. Set this either to "gre" or "vxlan". Our default is "gre". Please
 # note that, for proper performance with vxlan, your network should use Jumbo Frames.
-tenant_network_types="gre"
+tenant_network_types="gre,vxlan"
 # NOTE: You can also set other tenant typs like local, flat or even se to multiple options
 # like: tenant_network_types="flat,vlan,gre,vxlan", but, this can bring some admin
 # problems and, specially if you plan to use MAGNUM, there will be no way to let magnun
@@ -547,7 +556,7 @@ flat_network_create="no"
 flat_network_create_list=""
 # Also, you need to set up your physical FLAT network names. Sample:
 # flat_networks="physical01,physical02"
-flat_networks="physical01"
+flat_networks="provider01,provider02"
 #
 #
 #
@@ -565,7 +574,7 @@ vlan_network_create_list=""
 network_vlan_ranges=""
 #
 # If you want to use VPN As a Service, set the following to "yes"
-vpnaasinstall="no"
+vpnaasinstall="yes"
 #
 # If you want to use the neutron metering module, set this to yes (our default)
 neutronmetering="yes"
@@ -595,15 +604,15 @@ nova_in_compute_node="no"
 #
 # The "yes" option just instruct the installer to "not install" the compute service dependencies.
 #
-nova_without_compute="no"
+nova_without_compute="yes"
 #
 # This is the IP of your nova control node, controller or ALL-IN-ONE server.
-novahost="192.168.56.60"
+novahost="$controller"
 #
 # If you are installing NOVA in a compute node, the following IP must be ser to the server IP. If you
 # are installing a nova control node, all-in-one or controller, the IP must be set as the same in
 # "novahost" variable.
-nova_computehost="192.168.56.60"
+nova_computehost="$controller"
 #
 # Here you normally only need to change the password and e-mail:
 novauser="nova"
@@ -611,8 +620,8 @@ novaplacementuser="placement"
 novasvce="nova"
 novaplacementsvce="placement"
 novaec2svce="ec2"
-novapass="0p3nSt4ck"
-novaplacementuserpass="0p3nSt4ck"
+novapass="$password"
+novaplacementuserpass="$password"
 novaemail="nova@localhost"
 novaplacementemail="placement@localhost"
 # Only if you are using MySQL as DB backend. If for any chance, you have multiple
@@ -638,11 +647,11 @@ disk_allocation_ratio="1.0"
 # Options: vnc or spice. Default: vnc
 consoleflavor="vnc"
 # Spice Server: This is the IP of our controller, ALL-IN-ONE, or nova control node:
-spiceserver_controller_address="192.168.56.60"
+spiceserver_controller_address="$controller"
 # VNC Server: This is the IP of our controller, ALL-IN-ONE, or nova control node:
-vncserver_controller_address="192.168.56.60"
+vncserver_controller_address="$controller"
 # Keymap: User "us" or "es" here
-vnc_keymap="es"
+vnc_keymap="en-us"
 #
 # If "yes", our installer will create the nova/neutron security groups for icmp, ssh and rdp access
 vm_default_access="yes"
@@ -652,6 +661,7 @@ vm_extra_ports_udp="53"
 #
 # Leave this option as its default if you want to allow resize in the same host.
 allow_resize_to_same_host="True"
+allow_migrate_to_same_host="True"
 #
 # Those variables indicates nova to auto-start VM's on compute start, and also resume last VM's
 # states if possible. You REALLY want this on "False", but if you know what are you doing, use "True".
@@ -702,12 +712,12 @@ ceilometer_in_compute_node="no"
 # Also, if you want to install a pure controller (no compute node) or a pure ceilometer,
 # node, user "yes". In normal conditions, leave it at "no".
 #
-ceilometer_without_compute="no"
+ceilometer_without_compute="yes"
 #
 # This is the IP of the ceilometer node host or controller. It is the same for all 3 entries:
-ceilometerhost="192.168.56.60"
-aodhhost="192.168.56.60"
-gnocchihost="192.168.56.60"
+ceilometerhost="$controller"
+aodhhost="$controller"
+gnocchihost="$controller"
 # Only if you are using MySQL as DB backend. If for any chance, you have multiple
 # aodh hosts, put here the IP address of the extra hosts, space separated.
 # Normally, this is not necessary unless your mysql service access policies are very
@@ -716,31 +726,31 @@ extraaodhhosts=""
 # Change the password and e-mail (ceilometer and gnocchi)
 ceilometeruser="ceilometer"
 ceilometersvce="ceilometer"
-ceilometerpass="0p3nSt4ck"
+ceilometerpass="$password"
 ceilometeremail="ceilometer@localhost"
 gnocchiuser="gnocchi"
 gnocchisvce="gnocchi"
-gnocchipass="0p3nSt4ck"
+gnocchipass="$password"
 gnocchiemail="gnocchi@localhost"
 # Same for alarming service, change the password and e-mail
 aodhuser="aodh"
 aodhsvce="aodh"
-aodhpass="0p3nSt4ck"
+aodhpass="$password"
 aodhemail="aodh@localhost"
 #
 # MongoDB access information. We recommend to leave this as it is.. Just change the IP.
 # The IP should be the one where the ceilometer node or controller is installed.
-mondbhost="192.168.56.60"
+mondbhost="$controller"
 mondbport="27017"
 mondbname="ceilometer"
 mondbuser="ceilometer"
 # NOTE: For some reazon, the MongoDB password cannot contain "@" or similar characters which
 # need to be "escaped". Please just to be sure no problems arise here, use a password with
 # normal ascii and numbers. Use the following as a guide.
-mondbpass="C3iL0m3T3r-Op3nStaCk"
+mondbpass="$password"
 # Metering secret. Please regen this by using the following command:
 # openssl rand -hex 10
-metering_secret="fe01a6ed3e04c4be1cd8"
+metering_secret="796d537d0b267b049bdb"
 #
 # If you want ceilometer alarms, leave this on "yes". Case else, use "no". Please note that
 # Heat with AutoScaling depends on ceilometer alarms. So, leave this to yes if you plan to
@@ -750,7 +760,7 @@ ceilometeralarms="yes"
 # If you install swift, and want to include swift metrics in ceilometer, set the following
 # variable to yes. Otherwise, leave it to "no"
 #
-swiftmetrics="no"
+swiftmetrics="yes"
 #
 # Ceilometer Time To Live data (in seconds)
 # The following value controls the MongoDB data expiration in ceilometer
@@ -764,7 +774,7 @@ mongodbttl="604800"
 # plan to include AutoScaling in your cloud, is better idea to set the value to 60 seconds. Let
 # the following value in 60 seconds unless you don't plan to use AutoScaling. In that case, set
 # the value to 600 seconds.
-ceilointerval="60"
+ceilointerval="600"
 #
 # Workers for ceilometer, aodh and gnocchi
 ceilometerworkers="2"
@@ -780,22 +790,22 @@ gnocchiworkers="2"
 # if you don't want to install heat. Again: IN THE CONTROLLER !!!
 heatinstall="yes"
 # The heat host IP: Normally, the controller IP
-heathost="192.168.56.60"
+heathost="$controller"
 # Change the password and email
 heatuser="heat"
 heatsvce="heat"
-heatpass="0p3nSt4ck"
+heatpass="$password"
 heatemail="heat@localhost"
 heatcfnsvce="heat-cfn"
 stack_domain_admin="stack_domain_admin"
-stack_domain_admin_password="0p3nSt4ck"
+stack_domain_admin_password="$password"
 stack_user_domain_name="heat"
 heat_stack_user_role="heat_stack_user"
 heat_stack_owner="heat_stack_owner"
 # Regen the following variable by using: "openssl rand -hex 32"
 # NOTE: For heat, the encription key MUST BE 32 long. Use -hex 32 ALWAYS !!
 # in order to regenerate the key.
-heatencriptionkey="7a6502a023ff8a3a16fbc2e438bc7ddfd524707cc892c30769f7411b68de423b"
+heatencriptionkey="d5975fe293ca31371408486dd7ead0e400d80b81a02f29dd8cd3d551d721c213"
 # Only if you are using MySQL as DB backend. If for any chance, you have multiple
 # heat hosts, put here the IP address of the extra hosts, space separated.
 # Normally, this is not necessary unless your mysql service access policies are very
@@ -814,11 +824,11 @@ heatworkers="2"
 # IN THE CONTROLLER
 troveinstall="no"
 # The controller IP of course.... ;)
-trovehost="192.168.56.60"
+trovehost="$controller"
 # As usual, change the password and e-mail.
 troveuser="trove"
 trovesvce="trove"
-trovepass="0p3nSt4ck"
+trovepass="$password"
 troveemail="trove@localhost"
 # If you want to use CINDER as Database storage backend, set the following variable to "yes".
 # if you let the variable as "no" (our default), trove will use locally base storage. This
@@ -867,13 +877,13 @@ troveworkers="2"
 # Same as with heat and trove. By default we don't install them. If you want to include sahara
 # in your cloud, set this yo YES. And again, install this in the controller or in dedicated
 # sahara host
-saharainstall="no"
+saharainstall="yes"
 # The controller IP or the IP of the dedicated sahara host.
-saharahost="192.168.56.60"
+saharahost="$controller"
 # Again, change the password and e-mail
 saharauser="sahara"
 saharasvce="sahara"
-saharapass="0p3nSt4ck"
+saharapass="$password"
 saharaemail="sahara@localhost"
 # Only if you are using MySQL as DB backend. If for any chance, you have multiple
 # sahara hosts, put here the IP address of the extra hosts, space separated.
@@ -889,14 +899,14 @@ extrasaharahosts=""
 # Same as with heat,trove and sahara. By default we don't install them. If you want to include
 # manila in your cloud, set this yo YES. And again, install this in the controller or in a 
 # dedicated manila host
-manilainstall="no"
+manilainstall="yes"
 # The controller IP or the IP of the dedicated manila host.
-manilahost="192.168.56.60"
+manilahost="$controller"
 # Again, change the password and e-mail
 manilauser="manila"
 manilasvcev1="manila"
 manilasvcev2="manilav2"
-manilapass="0p3nSt4ck"
+manilapass="$password"
 manilaemail="manila@localhost"
 #
 # The next variable controls if you want to clean-up all lv's at uninstall time.
@@ -927,11 +937,11 @@ extramanilahosts=""
 # As with the other modules (trove, manila, etc.) our default is "no". Change it to "yes" in
 # order to install designate:
 designateinstall="no"
-designatehost="192.168.56.60"
+designatehost="$controller"
 # Again, change the password and e-mail
 designateuser="designate"
 designatesvc="designate"
-designatepass="0p3nSt4ck"
+designatepass="$password"
 designateemail="designate@localhost"
 #
 # This is very important. Pur here a valid e-mail. This is the e-mail that will be configured
@@ -967,7 +977,7 @@ extradesignatehosts=""
 #
 # Install magnum on the controller only. Our default is "no", but set the following
 # variable to "yes" if you want to install magnum. Again: IN THE CONTROLLER !!!
-magnuminstall="no"
+magnuminstall="yes"
 #
 # VERY IMPORTANT NOTE: Magnum REQUIRES HEAT !. It WONT WORK without heat, so, set
 # "heatinstall" to "yes". Also, if you plan to deploy docker or kubernetes container
@@ -976,15 +986,15 @@ magnuminstall="no"
 # registry, you'll need "swift" too.
 #
 # The magnum host IP: Normally, the controller IP
-magnumhost="192.168.56.60"
+magnumhost="$controller"
 # Change the password and email
 magnumuser="magnum"
 magnumsvce="magnum"
-magnumpass="0p3nSt4ck"
+magnumpass="$password"
 magnumemail="magnum@localhost"
 magnum_domain_name="magnum"
 magnum_domain_admin="magnum_domain_admin"
-magnum_domain_admin_password="0p3nSt4ck"
+magnum_domain_admin_password="$password"
 # Only if you are using MySQL as DB backend. If for any chance, you have multiple
 # magnum hosts, put here the IP address of the extra hosts, space separated.
 # Normally, this is not necessary unless your mysql service access policies are very
@@ -1006,7 +1016,7 @@ magnumworkers="2"
 # (Capital "O" and "S").
 # See /etc/snmp/snmpd.conf for more information
 #
-snmpinstall="no"
+snmpinstall="yes"
 
 
 
@@ -1021,9 +1031,9 @@ horizoninstall="yes"
 # By default, we are using the HIGHLY-RECOMMENDED-PLEASE-DON'T-CHANGE-IT database based cache.
 horizondbusage="yes"
 # Our timezone. Whatever timezone you use, please remember to escape the slash
-dashboard_timezone="America\/Caracas"
+dashboard_timezone="Africa\/Cairo"
 # Your horizon server IP - normally the controller IP.
-horizonhost="192.168.56.60"
+horizonhost="$controller"
 # Only if you are using MySQL as DB backend. If for any chance, you have multiple
 # horizon hosts, put here the IP address of the extra hosts, space separated.
 # Normally, this is not necessary unless your mysql service access policies are very

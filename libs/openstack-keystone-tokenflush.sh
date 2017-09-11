@@ -1,8 +1,10 @@
 #!/bin/bash
 #
-# Unattended installer for OpenStack.
-# Reynaldo R. Martinez P.
-# E-Mail: TigerLinux@Gmail.com
+## Unattended Installer (Semi Automated) for OpenStack (OCATA)
+## Abdo Farag
+## E-Mail: abdofarag85@gmail.com
+## This installer forked and based on openstack-ocata-installer-centos7 v1.2.0.el7 "Siberian Lynx" released by:
+## Reynaldo R. Martínez P. E-Mail: TigerLinux at Gmail dot com.
 #
 # Keystone Tokens cleanup script
 #

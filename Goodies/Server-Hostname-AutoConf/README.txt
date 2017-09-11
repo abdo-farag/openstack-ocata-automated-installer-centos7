@@ -1,7 +1,10 @@
 DNS-BASED HOSTNAME AUTOCONFIG SCRIPT
 For VM's running: Centos 5, Centos 6, Centos 7, Debian 6, Debian 7, Debian 8 and Ubuntu Server 14.04lts
-Reynaldo R. Martinez P.
-TigerLinux@gmail.com
+## Unattended Installer (Semi Automated) for OpenStack (OCATA)
+## Abdo Farag
+## E-Mail: abdofarag85@gmail.com
+## This installer forked and based on openstack-ocata-installer-centos7 v1.2.0.el7 "Siberian Lynx" released by:
+## Reynaldo R. Martínez P. E-Mail: TigerLinux at Gmail dot com.
 
 This script can be used to auto-configure the hostname of the virtual machine, provided that the
 DNS service has the reverse records (in-addr.arpa ptr's) correctly configured with the hostnames.
