@@ -1,8 +1,8 @@
 #!/bin/bash
-# Unattended/SemiAutomatted OpenStack Installer
-# Abdo Farag.
-# E-Mail: abdofarag85@Gmail.com
-# OpenStack OCATA for Centos 7
+#
+## Unattended Installer (Semi Automated) for OpenStack (OCATA)
+## Abdo Farag
+## E-Mail: abdofarag85@gmail.com
 #
 ## This script configures Nova to perform live migration option.
 #
