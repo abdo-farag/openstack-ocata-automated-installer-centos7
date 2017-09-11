@@ -173,7 +173,7 @@ ceilometer_without_compute="yes"
 ### Compute nodes:
 
 For the compute nodes, you must set to "yes" (this is mandatory) the installation variables for Nova and Neutron modules. The remaining modules (glance, cinder, horizon, trove, sahara and heat) must be set to "no". If you are using Ceilometer in the controller, you also must set it's installation variable to “yes” along with the ones for Nova and Neutron. In Addition, the following variables in sections of nova and neutron must be set to "yes":
-
+Also there samble main-config.rc lcated in ./configs/nova/main-config.rc this config file will make node as Compute node only with all needed configuration.
 ```bash
 nova_in_compute_node="yes"
 neutron_in_compute_node="yes"
