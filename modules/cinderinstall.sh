@@ -305,8 +305,8 @@ crudini --set /etc/cinder/cinder.conf DEFAULT os_region_name $endpointsregion
 #
 
  
- 
-if [ $ceilometerinstall == "yes" ]
+
+if [ $ceilometerinstall == "yes" ] || [ $cindernodetype == "storage" ]
 then
 	crudini --set /etc/cinder/cinder.conf DEFAULT notification_driver messagingv2
 	crudini --set /etc/cinder/cinder.conf DEFAULT control_exchange cinder
