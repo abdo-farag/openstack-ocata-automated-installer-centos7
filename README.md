@@ -5,7 +5,7 @@ E-Mail: abdofarag85 at gmail dot com
 Cairo, Egypt
 
 
-This Installer forke and based on openstack-ocata-installer-centos7 v1.2.0.el7 "Siberian Lynx" released by Reynaldo R. Martínez P. E-Mail: TigerLinux at Gmail dot com.
+TThis installer forked and based on openstack-ocata-installer-centos7 v1.2.0.el7 "Siberian Lynx" released by Reynaldo R. Martínez P. E-Mail: TigerLinux at Gmail dot com.
 
 ## Introduction
 
