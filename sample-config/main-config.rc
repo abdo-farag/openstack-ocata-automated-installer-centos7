@@ -384,12 +384,12 @@ cindernodehost="$controller"
 #
 # If you want to include the lvm backend, leave the following variable at "yes". Otherwise,
 # put "no" here:
-cinderconfiglvm="no"
+cinderconfiglvm="yes"
 # Our default is to use iscsi. Put here the iscsi server IP. It can be the one of the
 # controller, if you are using a LVM "cinder-volumes" inside the controller. Also, if you are
 # configuring a dedicated storage node, set the node IP here (not the one of your controller)
 cinder_iscsi_ip_address="$controller"
-cinderlvmname="cinder-volumes"
+cinderlvmname="dell"
 # Only if you are using MySQL as DB backend. If for any chance, you have multiple
 # cinder hosts, put here the IP address of the extra hosts, space separated.
 # Normally, this is not necessary unless your mysql service access policies are very
@@ -429,7 +429,7 @@ default_volume_type="dell"
 # "controller": This is a cinder node which is a dedicated controller.
 # "storage": This is a conder node which is a storage node.
 # The default for us, if you are installing a "all-in-one" openstack server, is "allinone":
-cindernodetype="controller"
+cindernodetype="allinone"
 # Please remember: Your first cinder node must be either "allinone" or "controller". Aditional
 # nodes must be set to "storage".
 #
