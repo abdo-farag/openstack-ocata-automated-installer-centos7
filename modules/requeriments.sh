@@ -240,7 +240,7 @@ else
 	exit 0
 fi
 
-if [ $internalbridgeinterface == "1" ]
+if [ $internalbridgeinterface == "1" ] || [ $cindernodetype == "storage" ]
 then
 	echo ""
 	echo "br-int interface OK"
