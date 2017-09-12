@@ -16,11 +16,10 @@ rm -rf /var/lib/nova/.ssh/id_rsa*
 sudo -u nova ssh-keygen -q -N "" -f /var/lib/nova/.ssh/id_rsa  > /dev/null 2>&1
 host=`hostname`
 novahost=`nova service-list | awk -F " " '{print $6}' |grep -v "Host" | grep -Ev "^$" | awk '!seen[$0]++'| grep -v "$host"`
-echo $novahost
+
 for i in `echo -e "$novahost"`
-do
-echo $i
-sshpass -p $novapass ssh-copy-id -o StrictHostKeyChecking=no -i /var/lib/nova/.ssh/id_rsa.pub nova@$i  > /dev/null 2>&1
+	do
+	sshpass -p $novapass ssh-copy-id -o StrictHostKeyChecking=no -i /var/lib/nova/.ssh/id_rsa.pub nova@$i  > /dev/null 2>&1
 done
 
 sudo -u nova echo "Host *" > /var/lib/nova/.ssh/config
