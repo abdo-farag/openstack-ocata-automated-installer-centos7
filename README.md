@@ -1,8 +1,8 @@
 ## Unattended Installer (Semi Automated) for OpenStack (OCATA)
 
-## Abdo Farag
-## E-Mail: abdofarag85 at gmail dot com
-## Cairo, Egypt
+# Abdo Farag
+# E-Mail: abdofarag85 at gmail dot com
+# Cairo, Egypt
 
 
 This installer forked and based on openstack-ocata-installer-centos7 v1.2.0.el7 "Siberian Lynx" released by:
