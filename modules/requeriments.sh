@@ -252,7 +252,7 @@ else
 	exit 0
 fi
 
-if [ $internalbridgepresent == "1" ]
+if [ $internalbridgepresent == "1" ] || [ $cindernodetype == "storage" ]
 then
 	echo ""
 	echo "OVS Integration Bridge Present. OK"
