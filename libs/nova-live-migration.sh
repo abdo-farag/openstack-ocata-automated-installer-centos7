@@ -7,7 +7,7 @@
 ## This script configures Nova to perform live migration option.
 #
 
-source $keystone_fulladmin_rc_file
+source /root/keystonerc_fulladmin
 
 usermod -s /bin/bash nova  > /dev/null 2>&1
 echo "$novapass" | passwd nova --stdin > /dev/null 2>&1
