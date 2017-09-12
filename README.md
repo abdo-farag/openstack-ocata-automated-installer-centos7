@@ -173,7 +173,7 @@ ceilometer_without_compute="yes"
 ### Compute nodes:
 
 For the compute nodes, you must set to "yes" (this is mandatory) the installation variables for Nova and Neutron modules. The remaining modules (glance, cinder, horizon, trove, sahara and heat) must be set to "no". If you are using Ceilometer in the controller, you also must set it's installation variable to “yes” along with the ones for Nova and Neutron. In Addition, the following variables in sections of nova and neutron must be set to "yes":
-Also there samble main-config.rc lcated in ./configs/nova/main-config.rc this config file will make node as Compute node only with all needed configuration.
+### Also there samble main-config.rc lcated in ./configs/nova/main-config.rc this config file will make server as Compute node only with all needed Packages and configuration.
 ```bash
 nova_in_compute_node="yes"
 neutron_in_compute_node="yes"
@@ -260,6 +260,7 @@ default_volume_type="nfs-192.168.50.61"
 Again: Always install your all-in-one or dedicated controller node first. If you fail to do this properly, you'll be unable to add storage nodes.
 
 First thing to do in your installer at your dedicated storage node is set the following variable to "storage":
+### Also there samble main-config.rc lcated in ./configs/cinder/main-config.rc this config file will make server as Compute node only with all needed Packages and configuration.
 
 ```bash
 cindernodetype="storage"
