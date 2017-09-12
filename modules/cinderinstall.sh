@@ -156,25 +156,25 @@ if [ $cindernodetype == "allinone" ] || [ $cindernodetype == "storage" ]
 then
 	if [ $cinderconfiglvm == "yes" ]
 	then
-		crudini --set /etc/cinder/cinder.conf DEFAULT enabled_backends lvm-$cindernodehost
-		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost volume_group $cinderlvmname
-		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost volume_driver "cinder.volume.drivers.lvm.LVMVolumeDriver"
-		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost iscsi_protocol iscsi
-		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost iscsi_helper tgtadm
-		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost iscsi_ip_address $cinder_iscsi_ip_address
-		crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost volume_backend_name LVM_iSCSI-$cindernodehost
+		crudini --set /etc/cinder/cinder.conf DEFAULT enabled_backends $default_volume_type
+		crudini --set /etc/cinder/cinder.conf $default_volume_type volume_group $cinderlvmname
+		crudini --set /etc/cinder/cinder.conf $default_volume_type volume_driver "cinder.volume.drivers.lvm.LVMVolumeDriver"
+		crudini --set /etc/cinder/cinder.conf $default_volume_type iscsi_protocol iscsi
+		crudini --set /etc/cinder/cinder.conf $default_volume_type iscsi_helper tgtadm
+		crudini --set /etc/cinder/cinder.conf $default_volume_type iscsi_ip_address $cinder_iscsi_ip_address
+		crudini --set /etc/cinder/cinder.conf $default_volume_type volume_backend_name $default_volume_type-LVM-iSCSI-$cindernodehost
 		case $cindervolclearmode in
 			"zero")
 				crudini --set /etc/cinder/cinder.conf DEFAULT volume_clear "zero"
 				crudini --set /etc/cinder/cinder.conf DEFAULT volume_clear_size $cinderclearmb
 				crudini --set /etc/cinder/cinder.conf DEFAULT volume_clear_ionice "-c3"
-				crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost volume_clear "zero"
-				crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost volume_clear_size $cinderclearmb
-				crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost volume_clear_ionice "-c3"
+				crudini --set /etc/cinder/cinder.conf $default_volume_type volume_clear "zero"
+				crudini --set /etc/cinder/cinder.conf $default_volume_type volume_clear_size $cinderclearmb
+				crudini --set /etc/cinder/cinder.conf $default_volume_type volume_clear_ionice "-c3"
 			;;
 			"none")
 				crudini --set /etc/cinder/cinder.conf DEFAULT volume_clear "none"
-				crudini --set /etc/cinder/cinder.conf lvm-$cindernodehost volume_clear "none"
+				crudini --set /etc/cinder/cinder.conf $default_volume_type volume_clear "none"
 			;;
 		esac
 	fi
@@ -232,8 +232,8 @@ then
 
 	if [ $cinderconfiglvm == "yes" ]
 	then
-		prevlvm="lvm-$cindernodehost"
-		backend="lvm-$cindernodehost"
+		prevlvm="$default_volume_type"
+		backend="$default_volume_type"
 		seplvm=","
 	else
 		seplvm=""
@@ -434,8 +434,8 @@ then
 	then
 		source $keystone_admin_rc_file
 		openstack volume type create \
-			--property volume_backend_name=LVM_iSCSI-$cindernodehost \
-			--description "LVM iSCSI Backend at node $cindernodehost" lvm-$cindernodehost
+			--property volume_backend_name=$default_volume_type-LVM-iSCSI-$cindernodehost \
+			--description "LVM iSCSI Backend at node $cindernodehost" $default_volume_type
 	fi
 
 	# if [ $cinderconfigglusterfs == "yes" ]

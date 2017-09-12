@@ -389,7 +389,7 @@ cinderconfiglvm="yes"
 # controller, if you are using a LVM "cinder-volumes" inside the controller. Also, if you are
 # configuring a dedicated storage node, set the node IP here (not the one of your controller)
 cinder_iscsi_ip_address="$cinder"
-cinderlvmname="dell"
+cinderlvmname="netapp"
 # Only if you are using MySQL as DB backend. If for any chance, you have multiple
 # cinder hosts, put here the IP address of the extra hosts, space separated.
 # Normally, this is not necessary unless your mysql service access policies are very
@@ -420,7 +420,7 @@ cinderconfignfs="no"
 # backend class in multiple cinder storage hosts, all backend classes are appended with the "node host
 # IP address", so, if you have by example 3 hosts all with lvm enable, you'll end with 3 lvm's with
 # the names: lvm-x.y.z.k, lvm-a.b.c.d and lvm-p.q.r.s so enable one as your default !.
-default_volume_type="dell"
+default_volume_type="NETAPP"
 #
 # Finally, the most important setting for your cinder installation. You can install multiple
 # cinder nodes with our installer. Your first note should be "at least" a "controller" node. Here,

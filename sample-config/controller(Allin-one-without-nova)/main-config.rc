@@ -418,7 +418,7 @@ nfs_mount_options="rw,hard,intr,timeo=90,bg,vers=3,proto=tcp,rsize=32768,wsize=3
 # backend class in multiple cinder storage hosts, all backend classes are appended with the "node host
 # IP address", so, if you have by example 3 hosts all with lvm enable, you'll end with 3 lvm's with
 # the names: lvm-x.y.z.k, lvm-a.b.c.d and lvm-p.q.r.s so enable one as your default !.
-default_volume_type="dell"
+default_volume_type="DELL"
 #
 # Finally, the most important setting for your cinder installation. You can install multiple
 # cinder nodes with our installer. Your first note should be "at least" a "controller" node. Here,
